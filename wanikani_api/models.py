@@ -196,6 +196,8 @@ class Subject(Resource):
             AuxiliaryMeaning(auxiliary_meaning_json) for auxiliary_meaning_json in resource_data["auxiliary_meanings"]
         ]
 
+        self.meaning_mnemonic = resource_data["meaning_mnemonic"] if 'meaning_mnemonic' in resource_data else ""
+
     def __str__(self) -> str:
         return f"{['['+meaning.meaning+']' if meaning.primary else meaning.meaning for meaning in self.meanings]}:{[character for character in self.characters] if self.characters else 'UNAVAILABLE'}"
 
@@ -240,6 +242,7 @@ class Vocabulary(Subject):
         self.readings = [
             Reading(reading_json) for reading_json in self._resource["readings"]
         ]  #: A list of :class:`.models.Reading` related to this Vocabulary.
+        self.reading_mnemonic = self._resource["reading_mnemonic"] if 'reading_mnemonic' in self._resource else ""
 
     def __str__(self):
         return f"Vocabulary: {super(Vocabulary, self).__str__()}"
@@ -263,6 +266,7 @@ class Kanji(Subject):
         self.readings = [
             Reading(reading_json) for reading_json in self._resource["readings"]
         ]  #: A list of :class:`.models.Reading` related to this Vocabulary.
+        self.reading_mnemonic = self._resource["reading_mnemonic"] if 'reading_mnemonic' in self._resource else ""
 
     def __str__(self):
         return f"Kanji: {super(Kanji, self).__str__()}"
