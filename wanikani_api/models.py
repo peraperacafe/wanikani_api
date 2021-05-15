@@ -319,6 +319,8 @@ class Reading:
             "accepted_answer"
         ]  #: Whether this answer is accepted as correct by Wanikani during review.
 
+        self.type = meaning_json["type"] if 'type' in meaning_json else ""
+
 
 class Assignment(Resource, Subjectable):
     """
